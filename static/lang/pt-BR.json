@@ -1,0 +1,25 @@
+{
+    "EffectsToChat": {
+        "SettingPlayer": "Jogador",
+        "SettingTrustedPlayer": "Jogador Confiável",
+        "SettingAssistantGM": "Assistente do Mestre",
+        "SettingGameMaster": "Mestre do Jogo",
+        "SettingNone": "Nenhum",
+        "SettingOnAddOrRemove": "Ao Adicionar ou Remover",
+        "SettingOnAddOnly": "Apenas ao Adicionar",
+        "SettingNever": "Nunca",
+
+        "SettingChatMessagePermissionName": "Permissão para Mensagens no Chat",
+        "SettingChatMessagePermissionHint": "Define o nível mínimo de permissão necessário para ver mensagens no chat quando efeitos são aplicados ou removidos.",
+        "SettingShowEffectDescriptionName": "Mostrar Descrições de Efeito",
+        "SettingShowEffectDescriptionHint": "Define quando as descrições dos efeitos serão exibidas na mensagem do chat.",
+        "SendChatToActorOwnerName": "Enviar Chat para o Dono do Ator",
+        "SendChatToActorOwnerHint": "Se ativado, enviará mensagens de efeito no chat para os usuários que possuem o ator afetado, mesmo que, de outra forma, eles não tivessem permissão para vê-las.",
+
+        "NoDescription": "Sem descrição",
+
+        "AppliedTo": "Aplicado a",
+        "ExpiredFrom": "Expirado de",
+        "RemovedFrom": "Removido de"
+    }
+}
