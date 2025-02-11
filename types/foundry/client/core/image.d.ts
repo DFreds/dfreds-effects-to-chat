@@ -1,7 +1,7 @@
 /**
  * A helper class to provide common functionality for working with Image objects
  */
-class ImageHelper {
+declare class ImageHelper {
     /**
      * Create thumbnail preview for a provided image path.
      * @param src               The URL or display object of the texture to render to a thumbnail
@@ -33,7 +33,7 @@ class ImageHelper {
      * @param src      A requested image source path
      * @returns       Does the filename end with a valid image extension?
      */
-    static hasImageExtension(src: string): boolean;
+    static hasImageExtension(src: string): src is ImageFilePath;
 
     /**
      * Composite a canvas object by rendering it to a single texture
