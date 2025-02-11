@@ -17,13 +17,12 @@ class ChatHandler {
         reason: string;
         actor: Actor;
         isCreate: boolean;
-    }): Promise<ChatMessage[]> {
+    }): Promise<ChatMessage | undefined> {
         const actorName = actor.token ? actor.token.name : actor.name;
 
-        // @ts-expect-error thinks this is wrong
-        return ChatMessage.create({
-            user: game.userId,
-            whisper: this.#getChatTargets(actor),
+        const chatMessage = await ChatMessage.create({
+            author: game.userId,
+            whisper: this.#getChatTargets(actor) ?? [],
             content: this.#getChatContent({
                 effect,
                 reason,
@@ -31,6 +30,8 @@ class ChatHandler {
                 isCreate,
             }),
         });
+
+        return chatMessage;
     }
 
     #getChatContent({
@@ -57,7 +58,7 @@ class ChatHandler {
         return message;
     }
 
-    #getChatTargets(actor: Actor) {
+    #getChatTargets(actor: Actor): string[] | null {
         if (
             this.#settings.chatMessagePermissionAsRoleNumber ===
             CONST.USER_ROLES.PLAYER
