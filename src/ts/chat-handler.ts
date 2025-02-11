@@ -45,12 +45,12 @@ class ChatHandler {
         actorName: string;
         isCreate: boolean;
     }): string {
-        let message = `<div class="convenient-effects-chat-header"><strong>${effect.name}</strong> - ${reason} ${actorName}</div>`;
+        let message = `<div class="effects-chat-header"><strong>${effect.name}</strong> - ${reason} ${actorName}</div>`;
         if (
             this.#settings.showEffectDescription === "onAddOrRemove" ||
             (this.#settings.showEffectDescription === "onAddOnly" && isCreate)
         ) {
-            message += `<hr class="convenient-effects-fancy-hr"><div class="convenient-effects-chat-description">${this.#getDescription(
+            message += `<hr class="effects-fancy-hr"><div class="effects-chat-description">${this.#getDescription(
                 effect,
             )}</div>`;
         }
