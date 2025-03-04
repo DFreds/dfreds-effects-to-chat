@@ -6,7 +6,7 @@ class Settings {
     #SHOW_EFFECT_DESCRIPTION = "showEffectDescription";
     #SEND_CHAT_TO_ACTOR_OWNER = "sendChatToActorOwner";
 
-    registerSettings(): void {
+    register(): void {
         const userRoles: Record<string, string> = {};
 
         userRoles[CONST.USER_ROLE_NAMES[1]] = game.i18n.localize(

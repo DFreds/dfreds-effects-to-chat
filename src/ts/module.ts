@@ -3,7 +3,7 @@ import { ChatHandler } from "./chat-handler.ts";
 import { Settings } from "./settings.ts";
 
 Hooks.once("init", () => {
-    new Settings().registerSettings();
+    new Settings().register();
 });
 
 Hooks.on(
