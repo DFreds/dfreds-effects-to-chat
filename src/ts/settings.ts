@@ -10,21 +10,21 @@ class Settings {
         const userRoles: Record<string, string> = {};
 
         userRoles[CONST.USER_ROLE_NAMES[1]] = game.i18n.localize(
-            EN_JSON.EffectsToChat.SettingPlayer,
+            "EffectsToChat.SettingPlayer",
         );
         userRoles[CONST.USER_ROLE_NAMES[2]] = game.i18n.localize(
-            EN_JSON.EffectsToChat.SettingTrustedPlayer,
+            "EffectsToChat.SettingTrustedPlayer",
         );
         userRoles[CONST.USER_ROLE_NAMES[3]] = game.i18n.localize(
-            EN_JSON.EffectsToChat.SettingAssistantGM,
+            "EffectsToChat.SettingAssistantGM",
         );
         userRoles[CONST.USER_ROLE_NAMES[4]] = game.i18n.localize(
-            EN_JSON.EffectsToChat.SettingGameMaster,
+            "EffectsToChat.SettingGameMaster",
         );
 
         game.settings.register(MODULE_ID, this.#CHAT_MESSAGE_PERMISSION, {
-            name: EN_JSON.EffectsToChat.SettingChatMessagePermissionName,
-            hint: EN_JSON.EffectsToChat.SettingChatMessagePermissionHint,
+            name: "EffectsToChat.SettingChatMessagePermissionName",
+            hint: "EffectsToChat.SettingChatMessagePermissionHint",
             scope: "world",
             config: true,
             default: CONST.USER_ROLE_NAMES[4],
@@ -33,26 +33,24 @@ class Settings {
         });
 
         game.settings.register(MODULE_ID, this.#SHOW_EFFECT_DESCRIPTION, {
-            name: EN_JSON.EffectsToChat.SettingShowEffectDescriptionName,
-            hint: EN_JSON.EffectsToChat.SettingShowEffectDescriptionHint,
+            name: "EffectsToChat.SettingShowEffectDescriptionName",
+            hint: "EffectsToChat.SettingShowEffectDescriptionHint",
             scope: "world",
             config: true,
             default: "onAddOrRemove",
             choices: {
                 onAddOrRemove: game.i18n.localize(
-                    EN_JSON.EffectsToChat.SettingOnAddOrRemove,
+                    "EffectsToChat.SettingOnAddOrRemove",
                 ),
-                onAddOnly: game.i18n.localize(
-                    EN_JSON.EffectsToChat.SettingOnAddOnly,
-                ),
-                never: game.i18n.localize(EN_JSON.EffectsToChat.SettingNever),
+                onAddOnly: game.i18n.localize("EffectsToChat.SettingOnAddOnly"),
+                never: game.i18n.localize("EffectsToChat.SettingNever"),
             },
             type: String,
         });
 
         game.settings.register(MODULE_ID, this.#SEND_CHAT_TO_ACTOR_OWNER, {
-            name: EN_JSON.EffectsToChat.SendChatToActorOwnerName,
-            hint: EN_JSON.EffectsToChat.SendChatToActorOwnerHint,
+            name: "EffectsToChat.SendChatToActorOwnerName",
+            hint: "EffectsToChat.SendChatToActorOwnerHint",
             scope: "world",
             config: true,
             default: false,

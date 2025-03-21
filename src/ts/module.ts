@@ -17,7 +17,7 @@ Hooks.on(
         const chatHandler = new ChatHandler();
         chatHandler.createChatForEffect({
             effect,
-            reason: game.i18n.localize(EN_JSON.EffectsToChat.AppliedTo),
+            reason: game.i18n.localize("EffectsToChat.AppliedTo"),
             actor: effect.parent,
             isCreate: true,
         });
@@ -39,8 +39,8 @@ Hooks.on(
         const chatHandler = new ChatHandler();
         const reason = game.i18n.localize(
             isExpired
-                ? EN_JSON.EffectsToChat.ExpiredFrom
-                : EN_JSON.EffectsToChat.RemovedFrom,
+                ? "EffectsToChat.ExpiredFrom"
+                : "EffectsToChat.RemovedFrom",
         );
         chatHandler.createChatForEffect({
             effect,

@@ -89,7 +89,7 @@ class ChatHandler {
         if (description) {
             return description.replace("<p>", "").replace("</p>", "");
         } else {
-            return game.i18n.localize(EN_JSON.EffectsToChat.NoDescription);
+            return game.i18n.localize("EffectsToChat.NoDescription");
         }
     }
 }
