@@ -1,7 +1,7 @@
 {
     "id": "dfreds-effects-to-chat",
     "title": "DFreds Effects to Chat",
-    "description": "A FoundryVTT template module using typescript and vite",
+    "description": "A FoundryVTT module that sends added and removed effects to the chat.",
     "version": "1.0.0",
     "compatibility": {
         "minimum": 12,
