@@ -28,6 +28,12 @@
             "name": "Português (Brasil)",
             "path": "lang/pt-BR.json",
             "flags": {}
+        },
+        {
+            "lang": "ja",
+            "name": "日本語",
+            "path": "lang/ja.json",
+            "flags": {}
         }
     ],
     "authors": [

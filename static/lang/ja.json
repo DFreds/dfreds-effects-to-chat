@@ -1,0 +1,25 @@
+{
+    "EffectsToChat": {
+        "SettingPlayer": "プレイヤー",
+        "SettingTrustedPlayer": "優良プレイヤー",
+        "SettingAssistantGM": "アシスタントGM",
+        "SettingGameMaster": "ゲームマスター",
+        "SettingNone": "なし",
+        "SettingOnAddOrRemove": "追加・除去時",
+        "SettingOnAddOnly": "追加時のみ",
+        "SettingNever": "しない",
+
+        "SettingChatMessagePermissionName": "チャットメッセージ権限",
+        "SettingChatMessagePermissionHint": "効果が適用または除去されたときにチャットメッセージを表示するための最低限の権限レベルを指定します。",
+        "SettingShowEffectDescriptionName": "効果説明を表示",
+        "SettingShowEffectDescriptionHint": "チャットメッセージに効果の説明を表示するタイミングを指定します。",
+        "SendChatToActorOwnerName": "キャラクターの所有者にチャット送信",
+        "SendChatToActorOwnerHint": "有効にすると、効果の影響を受けるキャラクターを所有するユーザーに、通常は表示権限がない場合でもチャットメッセージが送信されます。",
+
+        "NoDescription": "説明なし",
+
+        "AppliedTo": "適用:",
+        "ExpiredFrom": "終了:",
+        "RemovedFrom": "除去:"
+    }
+}
