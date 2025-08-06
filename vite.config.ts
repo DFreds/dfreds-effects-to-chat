@@ -5,6 +5,7 @@ import fs from "fs";
 import path from "path";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import packageJSON from "./package.json" with { type: "json" };
 
 const PACKAGE_ID = "modules/dfreds-effects-to-chat";
 
@@ -24,16 +25,12 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         plugins.push(
             minifyPlugin(),
             deleteLockFilePlugin(),
-            ...viteStaticCopy({
-                targets: [{ src: "README.md", dest: "." }],
-            }),
+            ...viteStaticCopy({ targets: [{ src: "README.md", dest: "." }] }),
         );
     } else if (buildMode === "stage") {
         plugins.push(
             minifyPlugin(),
-            ...viteStaticCopy({
-                targets: [{ src: "README.md", dest: "." }],
-            }),
+            ...viteStaticCopy({ targets: [{ src: "README.md", dest: "." }] }),
         );
     } else {
         plugins.push(
@@ -56,14 +53,13 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             "./dfreds-effects-to-chat.mjs",
             `/** ${message} */\n\nwindow.global = window;\nimport "./src/ts/module.ts";\n`,
         );
+        fs.writeFileSync("./vendor.mjs", `/** ${message} */\n`);
     }
 
     return {
         base: command === "build" ? "./" : `/modules/dfreds-effects-to-chat/`,
         publicDir: "static",
-        define: {
-            BUILD_MODE: JSON.stringify(buildMode),
-        },
+        define: { BUILD_MODE: JSON.stringify(buildMode) },
         esbuild: { keepNames: true },
         build: {
             outDir,
@@ -77,13 +73,20 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                 fileName: "module",
             },
             rollupOptions: {
+                external: [
+                    // Foundry VTT internal modules
+                    /^@client\//,
+                    /^@common\//,
+                ],
                 output: {
-                    assetFileNames: ({ name }): string =>
-                        name === "style.css"
-                            ? "styles/dfreds-effects-to-chat.css"
-                            : name ?? "",
+                    assetFileNames: "styles/dfreds-effects-to-chat.css",
                     chunkFileNames: "[name].mjs",
                     entryFileNames: "dfreds-effects-to-chat.mjs",
+                    manualChunks: {
+                        vendor: Object.keys(packageJSON.dependencies)
+                            ? Object.keys(packageJSON.dependencies)
+                            : [],
+                    },
                 },
             },
             target: "es2022",
@@ -106,16 +109,11 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             proxy: {
                 "^(?!/modules/dfreds-effects-to-chat/)":
                     "http://localhost:30000/",
-                "/socket.io": {
-                    target: "ws://localhost:30000",
-                    ws: true,
-                },
+                "/socket.io": { target: "ws://localhost:30000", ws: true },
             },
         },
         plugins,
-        css: {
-            devSourcemap: buildMode === "development",
-        },
+        css: { devSourcemap: buildMode === "development" },
     };
 });
 
