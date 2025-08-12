@@ -86,11 +86,11 @@ class ChatHandler {
 
     #getDescription(effect: ActiveEffect<Actor>): string {
         const description = effect.description;
-        if (description) {
-            return description.replace("<p>", "").replace("</p>", "");
-        } else {
-            return game.i18n.localize("EffectsToChat.NoDescription");
-        }
+        const sanitizedDescription = description
+            ? description.replace("<p>", "").replace("</p>", "")
+            : "EffectsToChat.NoDescription";
+
+        return game.i18n.localize(sanitizedDescription);
     }
 }
 
