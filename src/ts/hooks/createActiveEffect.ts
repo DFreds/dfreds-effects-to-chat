@@ -8,10 +8,9 @@ const CreateActiveEffect: Listener = {
             (activeEffect: any, _metadata: any, userId: any) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
-                if (game.user.id !== userId) return;
-                if (!(effect.parent instanceof Actor)) return;
-
                 const chatHandler = new ChatHandler();
+                if (!chatHandler.shouldSendToChat({ effect, userId })) return;
+
                 chatHandler.createChatForEffect({
                     effect,
                     reason: game.i18n.localize("EffectsToChat.AppliedTo"),

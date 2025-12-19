@@ -8,14 +8,13 @@ const DeleteActiveEffect: Listener = {
             (activeEffect: any, _metadata: any, userId: any) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
-                if (game.user.id !== userId) return;
-                if (!(effect.parent instanceof Actor)) return;
+                const chatHandler = new ChatHandler();
+                if (!chatHandler.shouldSendToChat({ effect, userId })) return;
 
                 const isExpired =
                     activeEffect?.duration?.remaining !== null &&
                     activeEffect?.duration?.remaining <= 0;
 
-                const chatHandler = new ChatHandler();
                 const reason = game.i18n.localize(
                     isExpired
                         ? "EffectsToChat.ExpiredFrom"

@@ -1,3 +1,4 @@
+import { MODULE_IDS } from "./constants.ts";
 import { Settings } from "./settings.ts";
 
 class ChatHandler {
@@ -5,6 +6,26 @@ class ChatHandler {
 
     constructor() {
         this.#settings = new Settings();
+    }
+
+    shouldSendToChat({
+        effect,
+        userId,
+    }: {
+        effect: ActiveEffect<Actor>;
+        userId: string;
+    }): boolean {
+        if (game.user.id !== userId) return false;
+        if (!(effect.parent instanceof Actor)) return false;
+
+        // TODO: short-term fix, this should be configurable if we send specific effects to chat
+        const isAura = foundry.utils.getProperty(
+            effect,
+            `flags.${MODULE_IDS.CHRIS_PREMADES}.aura`,
+        ) as boolean | undefined;
+        if (isAura === true) return false;
+
+        return true;
     }
 
     async createChatForEffect({
