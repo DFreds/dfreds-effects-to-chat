@@ -71,7 +71,7 @@ class ChatHandler {
             this.#settings.showEffectDescription === "onAddOrRemove" ||
             (this.#settings.showEffectDescription === "onAddOnly" && isCreate)
         ) {
-            message += `<hr class="effects-fancy-hr"><div class="effects-chat-description">${this.#getDescription(
+            message += `<hr class="effects-chat-fancy-hr"><div class="effects-chat-description">${this.#getDescription(
                 effect,
             )}</div>`;
         }
