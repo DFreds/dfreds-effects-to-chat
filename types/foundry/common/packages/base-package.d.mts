@@ -1,7 +1,12 @@
 import { CompendiumDocumentType } from "@client/utils/helpers.mjs";
 import { DataModelConstructionContext } from "@common/abstract/_types.mjs";
-import { DocumentOwnershipLevel, PackageAvailabilityCode, PackageType, UserRole } from "@common/constants.mjs";
-import { DataFieldOptions, ObjectFieldOptions } from "@common/data/_module.mjs";
+import { DocumentOwnershipString, PackageAvailabilityCode, PackageType, UserRoleName } from "@common/constants.mjs";
+import {
+    DataFieldOptions,
+    DataModelCleaningOptions,
+    DataModelUpdateState,
+    ObjectFieldOptions,
+} from "@common/data/_module.mjs";
 import type DataModel from "../abstract/data.mjs";
 import type * as fields from "../data/fields.mjs";
 import { PackageManifestData } from "./_types.mjs";
@@ -65,9 +70,9 @@ type PackageCompendiumFolderSchema = {
 };
 
 /** A special ObjectField which captures a mapping of USER_ROLES to DOCUMENT_OWNERSHIP_LEVELS. */
-export class CompendiumOwnershipField extends fields.ObjectField<Record<UserRole, DocumentOwnershipLevel>> {
+export class CompendiumOwnershipField extends fields.ObjectField<Record<UserRoleName, DocumentOwnershipString>> {
     static override get _defaults(): ObjectFieldOptions<
-        Record<UserRole, DocumentOwnershipLevel>,
+        Record<UserRoleName, DocumentOwnershipString>,
         boolean,
         boolean,
         boolean
@@ -80,7 +85,11 @@ export class CompendiumOwnershipField extends fields.ObjectField<Record<UserRole
 export class PackageCompendiumPacks<TSchema extends PackageCompendiumSchema> extends fields.SetField<
     fields.SchemaField<TSchema>
 > {
-    protected override _cleanType(value: Record<string, unknown>[], options?: Record<string, unknown>): void;
+    protected override _cleanType(
+        value: Record<string, unknown>[],
+        options: DataModelCleaningOptions,
+        _state: DataModelUpdateState,
+    ): void;
 
     override initialize(
         value: fields.SourceFromSchema<TSchema>[],
@@ -202,8 +211,7 @@ export default abstract class BasePackage<TDataSchema extends BasePackageSchema 
 }
 
 export default interface BasePackage<TDataSchema extends BasePackageSchema>
-    extends DataModel<null, TDataSchema>,
-        fields.ModelPropsFromSchema<BasePackageSchema> {}
+    extends DataModel<null, TDataSchema>, fields.ModelPropsFromSchema<BasePackageSchema> {}
 
 /**
  * The data structure of a package manifest. This data structure is extended by BasePackage subclasses to add additional

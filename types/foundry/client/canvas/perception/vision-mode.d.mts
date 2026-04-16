@@ -1,4 +1,5 @@
 import DataModel from "@common/abstract/data.mjs";
+import { LightingLevel } from "@common/constants.mjs";
 import * as fields from "@common/data/fields.mjs";
 import Token from "../placeables/token.mjs";
 import PointVisionSource from "../sources/point-vision-source.mjs";
@@ -84,8 +85,7 @@ export default class VisionMode extends DataModel<null, VisionModeSchema> {
 }
 
 export default interface VisionMode
-    extends DataModel<null, VisionModeSchema>,
-        fields.ModelPropsFromSchema<VisionModeSchema> {}
+    extends DataModel<null, VisionModeSchema>, fields.ModelPropsFromSchema<VisionModeSchema> {}
 
 export type LightingVisibility = (typeof VisionMode.LIGHTING_VISIBILITY)[keyof typeof VisionMode.LIGHTING_VISIBILITY];
 
@@ -113,7 +113,7 @@ export type VisionModeSchema = {
         coloration: LightingSchema;
         illumination: LightingSchema;
         darkness: LightingSchema;
-        levels: fields.ObjectField<object>;
+        levels: fields.ObjectField<Record<LightingLevel, LightingLevel>>;
         multipliers: fields.ObjectField<object>;
     }>;
     vision: fields.SchemaField<{
