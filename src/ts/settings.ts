@@ -62,7 +62,7 @@ class Settings {
         const roleName = game.settings.get(
             MODULE_ID,
             this.#CHAT_MESSAGE_PERMISSION,
-        ) as string;
+        ) as unknown as string;
 
         const userRoleTypes: { [key: string]: number } = CONST.USER_ROLES;
         const roleNumber = userRoleTypes[roleName] as number;
@@ -74,14 +74,14 @@ class Settings {
         return game.settings.get(
             MODULE_ID,
             this.#SHOW_EFFECT_DESCRIPTION,
-        ) as string;
+        ) as unknown as string;
     }
 
     get sendChatToActorOwner(): boolean {
         return game.settings.get(
             MODULE_ID,
             this.#SEND_CHAT_TO_ACTOR_OWNER,
-        ) as boolean;
+        ) as unknown as boolean;
     }
 }
 
