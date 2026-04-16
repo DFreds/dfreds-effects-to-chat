@@ -4,9 +4,9 @@
     "description": "A FoundryVTT module that sends added and removed effects to the chat.",
     "version": "1.0.0",
     "compatibility": {
-        "minimum": 13,
-        "verified": 13,
-        "maximum": 13
+        "minimum": 14,
+        "verified": 14,
+        "maximum": 14
     },
     "esmodules": ["dfreds-effects-to-chat.mjs"],
     "scripts": [],
