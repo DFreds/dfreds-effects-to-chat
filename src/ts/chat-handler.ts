@@ -8,21 +8,14 @@ class ChatHandler {
         this.#settings = new Settings();
     }
 
-    shouldSendToChat({
-        effect,
-        userId,
-    }: {
-        effect: ActiveEffect<Actor>;
-        userId: string;
-    }): boolean {
+    shouldSendToChat({ effect, userId }: { effect: ActiveEffect<Actor>; userId: string }): boolean {
         if (game.user.id !== userId) return false;
         if (!(effect.parent instanceof Actor)) return false;
 
         // TODO: short-term fix, this should be configurable if we send specific effects to chat
-        const isAura = foundry.utils.getProperty(
-            effect,
-            `flags.${MODULE_IDS.CHRIS_PREMADES}.aura`,
-        ) as boolean | undefined;
+        const isAura = foundry.utils.getProperty(effect, `flags.${MODULE_IDS.CHRIS_PREMADES}.aura`) as
+            | boolean
+            | undefined;
         if (isAura === true) return false;
 
         return true;
@@ -80,21 +73,14 @@ class ChatHandler {
     }
 
     #getChatTargets(actor: Actor): string[] | null {
-        if (
-            this.#settings.chatMessagePermissionAsRoleNumber ===
-            CONST.USER_ROLES.PLAYER
-        ) {
+        if (this.#settings.chatMessagePermissionAsRoleNumber === CONST.USER_ROLES.PLAYER) {
             return null;
         }
 
         return game.users
             .filter((user) => {
-                const hasRole =
-                    user.role >=
-                    this.#settings.chatMessagePermissionAsRoleNumber;
-                const ownsActor =
-                    !!user?.character?.uuid &&
-                    user.character.uuid === actor.uuid;
+                const hasRole = user.role >= this.#settings.chatMessagePermissionAsRoleNumber;
+                const ownsActor = !!user?.character?.uuid && user.character.uuid === actor.uuid;
 
                 if (this.#settings.sendChatToActorOwner) {
                     return hasRole || ownsActor;

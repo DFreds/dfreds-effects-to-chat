@@ -8,11 +8,7 @@ interface Listener {
 
 const HooksEffectsToChat: Listener = {
     listen(): void {
-        const listeners: Listener[] = [
-            Init,
-            CreateActiveEffect,
-            DeleteActiveEffect,
-        ];
+        const listeners: Listener[] = [Init, CreateActiveEffect, DeleteActiveEffect];
 
         for (const listener of listeners) {
             listener.listen();

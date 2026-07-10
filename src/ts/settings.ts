@@ -9,18 +9,10 @@ class Settings {
     register(): void {
         const userRoles: Record<string, string> = {};
 
-        userRoles[CONST.USER_ROLE_NAMES[1]] = game.i18n.localize(
-            "EffectsToChat.SettingPlayer",
-        );
-        userRoles[CONST.USER_ROLE_NAMES[2]] = game.i18n.localize(
-            "EffectsToChat.SettingTrustedPlayer",
-        );
-        userRoles[CONST.USER_ROLE_NAMES[3]] = game.i18n.localize(
-            "EffectsToChat.SettingAssistantGM",
-        );
-        userRoles[CONST.USER_ROLE_NAMES[4]] = game.i18n.localize(
-            "EffectsToChat.SettingGameMaster",
-        );
+        userRoles[CONST.USER_ROLE_NAMES[1]] = game.i18n.localize("EffectsToChat.SettingPlayer");
+        userRoles[CONST.USER_ROLE_NAMES[2]] = game.i18n.localize("EffectsToChat.SettingTrustedPlayer");
+        userRoles[CONST.USER_ROLE_NAMES[3]] = game.i18n.localize("EffectsToChat.SettingAssistantGM");
+        userRoles[CONST.USER_ROLE_NAMES[4]] = game.i18n.localize("EffectsToChat.SettingGameMaster");
 
         game.settings.register(MODULE_ID, this.#CHAT_MESSAGE_PERMISSION, {
             name: "EffectsToChat.SettingChatMessagePermissionName",
@@ -39,9 +31,7 @@ class Settings {
             config: true,
             default: "onAddOrRemove",
             choices: {
-                onAddOrRemove: game.i18n.localize(
-                    "EffectsToChat.SettingOnAddOrRemove",
-                ),
+                onAddOrRemove: game.i18n.localize("EffectsToChat.SettingOnAddOrRemove"),
                 onAddOnly: game.i18n.localize("EffectsToChat.SettingOnAddOnly"),
                 never: game.i18n.localize("EffectsToChat.SettingNever"),
             },
@@ -59,10 +49,7 @@ class Settings {
     }
 
     get chatMessagePermissionAsRoleNumber(): number {
-        const roleName = game.settings.get(
-            MODULE_ID,
-            this.#CHAT_MESSAGE_PERMISSION,
-        ) as unknown as string;
+        const roleName = game.settings.get(MODULE_ID, this.#CHAT_MESSAGE_PERMISSION) as unknown as string;
 
         const userRoleTypes: { [key: string]: number } = CONST.USER_ROLES;
         const roleNumber = userRoleTypes[roleName] as number;
@@ -71,17 +58,11 @@ class Settings {
     }
 
     get showEffectDescription(): string {
-        return game.settings.get(
-            MODULE_ID,
-            this.#SHOW_EFFECT_DESCRIPTION,
-        ) as unknown as string;
+        return game.settings.get(MODULE_ID, this.#SHOW_EFFECT_DESCRIPTION) as unknown as string;
     }
 
     get sendChatToActorOwner(): boolean {
-        return game.settings.get(
-            MODULE_ID,
-            this.#SEND_CHAT_TO_ACTOR_OWNER,
-        ) as unknown as boolean;
+        return game.settings.get(MODULE_ID, this.#SEND_CHAT_TO_ACTOR_OWNER) as unknown as boolean;
     }
 }
 
