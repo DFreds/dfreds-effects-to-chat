@@ -32,7 +32,6 @@ import { ChatLog, CompendiumDirectory, ItemDirectory, Settings } from "../applic
 import type ActorDirectory from "../applications/sidebar/tabs/actor-directory.mjs";
 import type Hotbar from "../applications/ui/hotbar.mjs";
 import type SceneControls from "../applications/ui/scene-controls.mjs";
-import type { SceneControl } from "../applications/ui/scene-controls.mjs";
 import Application from "../appv1/api/application-v1.mjs";
 import Dialog from "../appv1/api/dialog-v1.mjs";
 import { JournalPageSheet, JournalTextPageSheet } from "../appv1/sheets/journal-page-sheet.mjs";
@@ -52,9 +51,10 @@ type HookParamsClose<T extends ApplicationV2, N extends string> = HookParameters
 type HookParamsDeleteCombat = HookParameters<"deleteCombat", [Combat, { [key: string]: unknown }, string]>;
 type HookParamsDropCanvasData = HookParameters<"dropCanvasData", [Canvas, DropCanvasData, DragEvent]>;
 type HookParamsGetChatLogEntryContext = HookParameters<"getChatLogEntryContext", [HTMLElement, ContextMenuEntry[]]>;
-type HookParamsGetSceneControlButtons = HookParameters<"getSceneControlButtons", [Record<string, SceneControl>]>;
+type HookParamsGetSceneControlButtons = HookParameters<"getSceneControlButtons", [SceneControls["controls"]]>;
 type HookParamsHotbarDrop = HookParameters<"hotbarDrop", [Hotbar<Macro>, DropCanvasData, string]>;
 type HookParamsLightingRefresh = HookParameters<"lightingRefresh", [LightingLayer]>;
+type HookParamsOpenDetachedWindow = HookParameters<"openDetachedWindow", [string, Window]>;
 type HookParamsPreCreateItem = HookParameters<
     "preCreateItem",
     [PreCreate<foundry.documents.ItemSource>, DatabaseCreateOperation<Actor | null>, string]
@@ -114,6 +114,7 @@ export default class Hooks {
     static on(...args: HookParamsGetSceneControlButtons): number;
     static on(...args: HookParamsHotbarDrop): number;
     static on(...args: HookParamsLightingRefresh): number;
+    static on(...args: HookParamsOpenDetachedWindow): number;
     static on(...args: HookParamsPreCreateItem): number;
     static on(...args: HooksParamsPreUpdateCombat): number;
     static on(...args: HookParamsPreUpdateToken): number;

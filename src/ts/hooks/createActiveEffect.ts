@@ -7,7 +7,7 @@ const CreateActiveEffect: Listener = {
             const effect = activeEffect as ActiveEffect<any>;
 
             const chatHandler = new ChatHandler();
-            if (!chatHandler.shouldSendToChat({ effect, userId })) return;
+            if (!chatHandler.shouldSendToChat({ effect, userId, isCreate: true })) return;
 
             chatHandler.createChatForEffect({
                 effect,

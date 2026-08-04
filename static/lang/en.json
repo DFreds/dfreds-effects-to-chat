@@ -7,10 +7,13 @@
         "SettingNone": "None",
         "SettingOnAddOrRemove": "On Add or Remove",
         "SettingOnAddOnly": "On Add Only",
+        "SettingOnRemoveOnly": "On Remove Only",
         "SettingNever": "Never",
 
         "SettingChatMessagePermissionName": "Chat Message Permission",
         "SettingChatMessagePermissionHint": "This defines the minimum permission level to see chat messages when effects are applied or removed.",
+        "SettingSendChatMessageName": "Send Chat Messages",
+        "SettingSendChatMessageHint": "This defines when to send chat messages for effects. Effects that expire count as being removed.",
         "SettingShowEffectDescriptionName": "Show Effect Descriptions",
         "SettingShowEffectDescriptionHint": "This defines when to show effect descriptions in the chat message.",
         "SendChatToActorOwnerName": "Send Chat to Actor Owner",

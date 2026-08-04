@@ -8,9 +8,21 @@ class ChatHandler {
         this.#settings = new Settings();
     }
 
-    shouldSendToChat({ effect, userId }: { effect: ActiveEffect<Actor>; userId: string }): boolean {
+    shouldSendToChat({
+        effect,
+        userId,
+        isCreate,
+    }: {
+        effect: ActiveEffect<Actor>;
+        userId: string;
+        isCreate: boolean;
+    }): boolean {
         if (game.user.id !== userId) return false;
         if (!(effect.parent instanceof Actor)) return false;
+
+        const sendChatMessage = this.#settings.sendChatMessage;
+        if (sendChatMessage === "onAddOnly" && !isCreate) return false;
+        if (sendChatMessage === "onRemoveOnly" && isCreate) return false;
 
         // TODO: short-term fix, this should be configurable if we send specific effects to chat
         const isAura = foundry.utils.getProperty(effect, `flags.${MODULE_IDS.CHRIS_PREMADES}.aura`) as

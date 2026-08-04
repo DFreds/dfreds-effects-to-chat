@@ -7,7 +7,7 @@ const DeleteActiveEffect: Listener = {
             const effect = activeEffect as ActiveEffect<any>;
 
             const chatHandler = new ChatHandler();
-            if (!chatHandler.shouldSendToChat({ effect, userId })) return;
+            if (!chatHandler.shouldSendToChat({ effect, userId, isCreate: false })) return;
 
             const isExpired = activeEffect?.duration?.remaining !== null && activeEffect?.duration?.remaining <= 0;
 

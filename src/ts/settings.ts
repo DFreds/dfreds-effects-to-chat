@@ -3,6 +3,7 @@ import { MODULE_ID } from "./constants.ts";
 class Settings {
     // Settings keys
     #CHAT_MESSAGE_PERMISSION = "chatMessagePermission";
+    #SEND_CHAT_MESSAGE = "sendChatMessage";
     #SHOW_EFFECT_DESCRIPTION = "showEffectDescription";
     #SEND_CHAT_TO_ACTOR_OWNER = "sendChatToActorOwner";
 
@@ -21,6 +22,20 @@ class Settings {
             config: true,
             default: CONST.USER_ROLE_NAMES[4],
             choices: userRoles,
+            type: String,
+        });
+
+        game.settings.register(MODULE_ID, this.#SEND_CHAT_MESSAGE, {
+            name: "EffectsToChat.SettingSendChatMessageName",
+            hint: "EffectsToChat.SettingSendChatMessageHint",
+            scope: "world",
+            config: true,
+            default: "onAddOrRemove",
+            choices: {
+                onAddOrRemove: game.i18n.localize("EffectsToChat.SettingOnAddOrRemove"),
+                onAddOnly: game.i18n.localize("EffectsToChat.SettingOnAddOnly"),
+                onRemoveOnly: game.i18n.localize("EffectsToChat.SettingOnRemoveOnly"),
+            },
             type: String,
         });
 
@@ -55,6 +70,10 @@ class Settings {
         const roleNumber = userRoleTypes[roleName] as number;
 
         return roleNumber;
+    }
+
+    get sendChatMessage(): string {
+        return game.settings.get(MODULE_ID, this.#SEND_CHAT_MESSAGE) as unknown as string;
     }
 
     get showEffectDescription(): string {
