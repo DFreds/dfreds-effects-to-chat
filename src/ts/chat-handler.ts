@@ -26,8 +26,7 @@ class ChatHandler {
 
         // TODO: short-term fix, this should be configurable if we send specific effects to chat
         const isAura = foundry.utils.getProperty(effect, `flags.${MODULE_IDS.CHRIS_PREMADES}.aura`) as
-            | boolean
-            | undefined;
+            boolean | undefined;
         if (isAura === true) return false;
 
         return true;
