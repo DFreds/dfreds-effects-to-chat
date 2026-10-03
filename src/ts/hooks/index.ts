@@ -1,3 +1,4 @@
+import { HotReload } from "./hot-reload.ts";
 import { Init } from "./init.ts";
 import { CreateActiveEffect } from "./createActiveEffect.ts";
 import { DeleteActiveEffect } from "./deleteActiveEffect.ts";
@@ -8,7 +9,7 @@ interface Listener {
 
 const HooksEffectsToChat: Listener = {
     listen(): void {
-        const listeners: Listener[] = [Init, CreateActiveEffect, DeleteActiveEffect];
+        const listeners: Listener[] = [HotReload, Init, CreateActiveEffect, DeleteActiveEffect];
 
         for (const listener of listeners) {
             listener.listen();
