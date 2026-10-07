@@ -1,4 +1,4 @@
-import { MODULE_IDS } from "./constants.ts";
+import { CHRIS_PREMADES_ID } from "./constants.ts";
 import { Settings } from "./settings.ts";
 
 class ChatHandler {
@@ -25,8 +25,7 @@ class ChatHandler {
         if (sendChatMessage === "onRemoveOnly" && isCreate) return false;
 
         // TODO: short-term fix, this should be configurable if we send specific effects to chat
-        const isAura = foundry.utils.getProperty(effect, `flags.${MODULE_IDS.CHRIS_PREMADES}.aura`) as
-            boolean | undefined;
+        const isAura = foundry.utils.getProperty(effect, `flags.${CHRIS_PREMADES_ID}.aura`) as boolean | undefined;
         if (isAura === true) return false;
 
         return true;
