@@ -47,7 +47,7 @@ class ChatHandler {
 
         const chatMessage = await ChatMessage.create({
             author: game.userId,
-            whisper: this.#getChatTargets(actor) ?? [],
+            whisper: this.#getChatTargets(actor),
             content: this.#getChatContent({
                 effect,
                 reason,
@@ -83,21 +83,18 @@ class ChatHandler {
         return message;
     }
 
-    #getChatTargets(actor: Actor): string[] | null {
-        if (this.#settings.chatMessagePermissionAsRoleNumber === CONST.USER_ROLES.PLAYER) {
-            return null;
-        }
+    #getChatTargets(actor: Actor): string[] {
+        const minimumRole = this.#settings.chatMessagePermissionAsRoleNumber;
+        if (minimumRole === CONST.USER_ROLES.PLAYER) return [];
+
+        const sendToOwner = this.#settings.sendChatToActorOwner;
 
         return game.users
             .filter((user) => {
-                const hasRole = user.role >= this.#settings.chatMessagePermissionAsRoleNumber;
-                const ownsActor = !!user?.character?.uuid && user.character.uuid === actor.uuid;
+                const hasRole = user.role >= minimumRole;
+                const ownsActor = user.character?.uuid === actor.uuid;
 
-                if (this.#settings.sendChatToActorOwner) {
-                    return hasRole || ownsActor;
-                } else {
-                    return hasRole;
-                }
+                return hasRole || (sendToOwner && ownsActor);
             })
             .map((user) => user.id);
     }
