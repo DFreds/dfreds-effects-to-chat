@@ -2,11 +2,7 @@ import { CHRIS_PREMADES_ID } from "./constants.ts";
 import { Settings } from "./settings.ts";
 
 class ChatHandler {
-    #settings: Settings;
-
-    constructor() {
-        this.#settings = new Settings();
-    }
+    #settings = new Settings();
 
     shouldSendToChat({
         effect,
@@ -44,7 +40,7 @@ class ChatHandler {
     }): Promise<ChatMessage | undefined> {
         const actorName = actor.token ? actor.token.name : actor.name;
 
-        const chatMessage = await ChatMessage.create({
+        return ChatMessage.create({
             author: game.userId,
             whisper: this.#getChatTargets(actor),
             content: this.#getChatContent({
@@ -54,8 +50,6 @@ class ChatHandler {
                 isCreate,
             }),
         });
-
-        return chatMessage;
     }
 
     #getChatContent({
