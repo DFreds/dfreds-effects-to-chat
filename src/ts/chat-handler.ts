@@ -29,16 +29,14 @@ class ChatHandler {
 
     async createChatForEffect({
         effect,
-        reason,
-        actor,
         isCreate,
     }: {
         effect: ActiveEffect<Actor>;
-        reason: string;
-        actor: Actor;
         isCreate: boolean;
     }): Promise<ChatMessage | undefined> {
+        const actor = effect.parent;
         const actorName = actor.token ? actor.token.name : actor.name;
+        const reason = this.#getReason(effect, isCreate);
 
         return ChatMessage.create({
             author: game.userId,
@@ -50,6 +48,16 @@ class ChatHandler {
                 isCreate,
             }),
         });
+    }
+
+    #getReason(effect: ActiveEffect<Actor>, isCreate: boolean): string {
+        if (isCreate) return game.i18n.localize("EffectsToChat.AppliedTo");
+
+        const remaining = effect.duration.remaining;
+        // @ts-expect-error PreparedEffectDurationData.remaining is typed as string, but is number | null
+        const isExpired = remaining !== null && remaining <= 0;
+
+        return game.i18n.localize(isExpired ? "EffectsToChat.ExpiredFrom" : "EffectsToChat.RemovedFrom");
     }
 
     #getChatContent({

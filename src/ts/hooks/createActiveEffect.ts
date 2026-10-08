@@ -9,12 +9,7 @@ const CreateActiveEffect: Listener = {
             const chatHandler = new ChatHandler();
             if (!chatHandler.shouldSendToChat({ effect, userId, isCreate: true })) return;
 
-            chatHandler.createChatForEffect({
-                effect,
-                reason: game.i18n.localize("EffectsToChat.AppliedTo"),
-                actor: effect.parent,
-                isCreate: true,
-            });
+            chatHandler.createChatForEffect({ effect, isCreate: true });
         });
     },
 };
