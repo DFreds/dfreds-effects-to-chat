@@ -71,7 +71,8 @@ class ChatHandler {
         actorName: string;
         isCreate: boolean;
     }): string {
-        let message = `<div class="effects-chat-header"><strong>${effect.name}</strong> - ${reason} ${actorName}</div>`;
+        const effectName = game.i18n.localize(effect.name);
+        let message = `<div class="effects-chat-header"><strong>${effectName}</strong> - ${reason} ${actorName}</div>`;
         if (
             this.#settings.showEffectDescription === "onAddOrRemove" ||
             (this.#settings.showEffectDescription === "onAddOnly" && isCreate)
