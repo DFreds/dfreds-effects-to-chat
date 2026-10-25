@@ -7,10 +7,13 @@
         "SettingNone": "なし",
         "SettingOnAddOrRemove": "追加・除去時",
         "SettingOnAddOnly": "追加時のみ",
+        "SettingOnRemoveOnly": "除去時のみ",
         "SettingNever": "しない",
 
         "SettingChatMessagePermissionName": "チャットメッセージ権限",
         "SettingChatMessagePermissionHint": "効果が適用または除去されたときにチャットメッセージを表示するための最低限の権限レベルを指定します。",
+        "SettingSendChatMessageName": "チャットメッセージを送信",
+        "SettingSendChatMessageHint": "効果のチャットメッセージを送信するタイミングを指定します。期限切れで終了した効果は除去として扱われます。",
         "SettingShowEffectDescriptionName": "効果説明を表示",
         "SettingShowEffectDescriptionHint": "チャットメッセージに効果の説明を表示するタイミングを指定します。",
         "SendChatToActorOwnerName": "キャラクターの所有者にチャット送信",

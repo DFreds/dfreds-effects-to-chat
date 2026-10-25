@@ -7,10 +7,13 @@
         "SettingNone": "Nenhum",
         "SettingOnAddOrRemove": "Ao Adicionar ou Remover",
         "SettingOnAddOnly": "Apenas ao Adicionar",
+        "SettingOnRemoveOnly": "Apenas ao Remover",
         "SettingNever": "Nunca",
 
         "SettingChatMessagePermissionName": "Permissão para Mensagens no Chat",
         "SettingChatMessagePermissionHint": "Define o nível mínimo de permissão necessário para ver mensagens no chat quando efeitos são aplicados ou removidos.",
+        "SettingSendChatMessageName": "Enviar Mensagens no Chat",
+        "SettingSendChatMessageHint": "Define quando enviar mensagens no chat para efeitos. Efeitos que expiram contam como removidos.",
         "SettingShowEffectDescriptionName": "Mostrar Descrições de Efeito",
         "SettingShowEffectDescriptionHint": "Define quando as descrições dos efeitos serão exibidas na mensagem do chat.",
         "SendChatToActorOwnerName": "Enviar Chat para o Dono do Ator",
