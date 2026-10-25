@@ -40,7 +40,7 @@ class ChatHandler {
         return ChatMessage.create({
             author: game.userId,
             whisper: this.#getChatTargets(actor),
-            content: this.#getChatContent({
+            content: await this.#getChatContent({
                 effect,
                 reason,
                 actorName,
@@ -59,7 +59,7 @@ class ChatHandler {
         return game.i18n.localize(isExpired ? "EffectsToChat.ExpiredFrom" : "EffectsToChat.RemovedFrom");
     }
 
-    #getChatContent({
+    async #getChatContent({
         effect,
         reason,
         actorName,
@@ -69,16 +69,15 @@ class ChatHandler {
         reason: string;
         actorName: string;
         isCreate: boolean;
-    }): string {
+    }): Promise<string> {
         const effectName = game.i18n.localize(effect.name);
         let message = `<div class="effects-chat-header"><strong>${effectName}</strong> - ${reason} ${actorName}</div>`;
         if (
             this.#settings.showEffectDescription === "onAddOrRemove" ||
             (this.#settings.showEffectDescription === "onAddOnly" && isCreate)
         ) {
-            message += `<hr class="effects-chat-fancy-hr"><div class="effects-chat-description">${this.#getDescription(
-                effect,
-            )}</div>`;
+            const description = await this.#getDescription(effect);
+            message += `<hr class="effects-chat-fancy-hr"><div class="effects-chat-description">${description}</div>`;
         }
 
         return message;
@@ -100,13 +99,9 @@ class ChatHandler {
             .map((user) => user.id);
     }
 
-    #getDescription(effect: ActiveEffect<Actor>): string {
-        const description = effect.description;
-        const sanitizedDescription = description
-            ? description.replace("<p>", "").replace("</p>", "")
-            : "EffectsToChat.NoDescription";
-
-        return game.i18n.localize(sanitizedDescription);
+    async #getDescription(effect: ActiveEffect<Actor>): Promise<string> {
+        const description = game.i18n.localize(effect.description || "EffectsToChat.NoDescription");
+        return foundry.applications.ux.TextEditor.enrichHTML(description, { relativeTo: effect });
     }
 }
 

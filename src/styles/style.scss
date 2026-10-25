@@ -7,6 +7,14 @@
     margin-bottom: 5px !important;
     margin-top: 5px !important;
     text-size-adjust: 80%;
+
+    > p:first-child {
+        margin-top: 0;
+    }
+
+    > p:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .effects-chat-fancy-hr {
