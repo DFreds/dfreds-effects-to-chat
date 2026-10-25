@@ -40,6 +40,7 @@
 - Sends chat messages when an effect is added, removed, or expires
 - Configure if messages should be sent on add and remove, on add only, or on remove only
 - Configure if the effect description should be shown or not
+- Aura effects from Chris's Premades are not sent to chat, since they are added and removed as tokens move
 
 ![Effects to Chat](https://www.dfreds-modules.com/assets/images/showcase-c218a719ab9eb4fb3ef4d6396828cde0.png)
 

@@ -20,9 +20,8 @@ class ChatHandler {
         if (sendChatMessage === "onAddOnly" && !isCreate) return false;
         if (sendChatMessage === "onRemoveOnly" && isCreate) return false;
 
-        // TODO: short-term fix, this should be configurable if we send specific effects to chat
-        const isAura = foundry.utils.getProperty(effect, `flags.${CHRIS_PREMADES_ID}.aura`) as boolean | undefined;
-        if (isAura === true) return false;
+        const isChrisPremadesAura = foundry.utils.getProperty(effect, `flags.${CHRIS_PREMADES_ID}.aura`) === true;
+        if (isChrisPremadesAura) return false;
 
         return true;
     }
