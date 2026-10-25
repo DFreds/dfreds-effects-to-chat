@@ -93,7 +93,7 @@ class ChatHandler {
         return game.users
             .filter((user) => {
                 const hasRole = user.role >= minimumRole;
-                const ownsActor = user.character?.uuid === actor.uuid;
+                const ownsActor = actor.testUserPermission(user, "OWNER");
 
                 return hasRole || (sendToOwner && ownsActor);
             })
