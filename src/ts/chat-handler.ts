@@ -53,7 +53,6 @@ class ChatHandler {
         if (isCreate) return game.i18n.localize("EffectsToChat.AppliedTo");
 
         const remaining = effect.duration.remaining;
-        // @ts-expect-error PreparedEffectDurationData.remaining is typed as string, but is number | null
         const isExpired = remaining !== null && remaining <= 0;
 
         return game.i18n.localize(isExpired ? "EffectsToChat.ExpiredFrom" : "EffectsToChat.RemovedFrom");
