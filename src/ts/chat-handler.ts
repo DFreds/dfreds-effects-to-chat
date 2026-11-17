@@ -15,6 +15,7 @@ class ChatHandler {
     }): boolean {
         if (game.user.id !== userId) return false;
         if (!(effect.parent instanceof Actor)) return false;
+        if (effect.parent.pack) return false;
 
         const sendChatMessage = this.#settings.sendChatMessage;
         if (sendChatMessage === "onAddOnly" && !isCreate) return false;
