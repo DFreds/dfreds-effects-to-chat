@@ -13,9 +13,9 @@ class ChatHandler {
         userId: string;
         isCreate: boolean;
     }): boolean {
-        if (game.user.id !== userId) return false;
         if (!(effect.parent instanceof Actor)) return false;
         if (effect.parent.pack) return false;
+        if (game.user.id !== this.#getPosterId(effect.parent, userId)) return false;
 
         const sendChatMessage = this.#settings.sendChatMessage;
         if (sendChatMessage === "onAddOnly" && !isCreate) return false;
@@ -81,6 +81,14 @@ class ChatHandler {
         }
 
         return message;
+    }
+
+    #getPosterId(actor: Actor, userId: string): string {
+        const targets = this.#getChatTargets(actor);
+        const canSeeCard = targets.length === 0 || targets.includes(userId);
+        if (canSeeCard) return userId;
+
+        return game.users.activeGM?.id ?? userId;
     }
 
     #getChatTargets(actor: Actor): string[] {
