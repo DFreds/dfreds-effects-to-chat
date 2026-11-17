@@ -5,6 +5,7 @@ const DeleteActiveEffect: Listener = {
     listen(): void {
         Hooks.on("deleteActiveEffect", (activeEffect: any, _metadata: any, userId: any) => {
             const effect = activeEffect as ActiveEffect<any>;
+            if (effect.duration.expired) return;
 
             const chatHandler = new ChatHandler();
             if (!chatHandler.shouldSendToChat({ effect, userId, isCreate: false })) return;
